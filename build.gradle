@@ -1,0 +1,50 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
+}
+
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
+springBoot {
+    mainClass =  'org.example.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.example.Main'
+    }
+}
+
+
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.9.1"))
+
+    implementation 'org.springframework:spring-web:6.0.0'
+    // json
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    // stt
+    implementation 'com.google.cloud:google-cloud-speech:2.6.1'
+    // tts
+    implementation 'com.google.cloud:google-cloud-texttospeech:2.6.0'
+    implementation 'org.apache.httpcomponents:httpcore:4.4.16'
+    // mp3
+    implementation 'javazoom:jlayer:1.0.1'
+
+}
+
+
+
+tasks.test {
+    useJUnitPlatform()
+}
